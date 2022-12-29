@@ -102,7 +102,7 @@ public class AMLGUI {
         try
         {
             Properties props = new Properties();
-            props.load(new FileInputStream(new File("config.ini")));
+            props.load(new FileInputStream(new File("files/config.ini")));
             defaultLevel = props.getProperty("default_level");
 
             if ( defaultLevel.equals("hard") ) { 
@@ -385,7 +385,7 @@ public class AMLGUI {
                 System.out.println(fix_data);
                 try
                 {
-                    FileWriter writer = new FileWriter("accounts.txt", true);
+                    FileWriter writer = new FileWriter("files/accounts.txt", true);
                     writer.write(fix_data);
                     writer.close();
                 }
@@ -404,7 +404,7 @@ public class AMLGUI {
                 try
                 {
                     Properties props = new Properties();
-                    props.load(new FileInputStream(new File("config.ini")));
+                    props.load(new FileInputStream(new File("files/config.ini")));
                     configValueDebug = props.getProperty("debug_value");
                     autosaving = props.getProperty("auto_save");
                 } 
@@ -425,7 +425,7 @@ public class AMLGUI {
             public void actionPerformed(ActionEvent e) {
                 try
                 {
-                    FileWriter writer = new FileWriter("accounts.txt", false);
+                    FileWriter writer = new FileWriter("files/accounts.txt", false);
                     writer.write("");
                     writer.close();
                 }
