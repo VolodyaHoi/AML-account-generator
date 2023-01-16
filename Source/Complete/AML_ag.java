@@ -30,14 +30,14 @@ import java.net.URI;
 
 public class AML_ag {
 
-    JFrame mainWindow, warningWindow, passwordInfoWindow, saveWindow, saveSuccefullyWindow, clearTextFileAccept; // Frames
+    JFrame mainWindow, warningWindow, passwordInfoWindow, saveWindow, saveSuccefullyWindow, clearTextFileAccept, parserExampleWindow; // Frames
 
     JMenu mainMenu, settingsMenu, helpMenu, linksMenu, debugMenu; // Menu bar
 
     JMenuItem generateNickNameOption, generatePasswordOption, generateAllOption, saveInTextFile, debugWarningWindow, 
     helpAboutPassword, linkOpenAuthor, linkOpenTeam, linkOpenProjects, linkOpenBots, 
     linkOpenGithubPages, debugLevelsInfoWindow, debugSaveWindow, debugSaveSuccceffully, debugSaveInTextFile,
-    debugReadConfig, clearTextFile, debugClearTextFile, debugAcceptClearTextFile, debugOpenLink; // Menu Items
+    debugReadConfig, clearTextFile, debugClearTextFile, debugAcceptClearTextFile, debugOpenLink, helpParserExample; // Menu Items
 
     JMenuBar mainMenuBar;
 
@@ -47,10 +47,10 @@ public class AML_ag {
     JLabel textNickNameGenerate, textPasswordGenerate, textNickNameValue, textPasswordValue,
     textLevelsDifficulty, textHelpAboutFirstString, textHelpAboutSecondString, textHelpAboutThirdString,
     textWarningFirstString, textWarningSecondString, defaultPasswordLevel, textPasswordInfoHardLVL, textPasswordInfoNormalLVL, 
-    textPasswordInfoEazyLVL, textPasswordInfoPS, textSaveSuccefully, textClearTextFile; // Texts
+    textPasswordInfoEazyLVL, textPasswordInfoPS, textSaveSuccefully, textClearTextFile, parserExample; // Texts
 
     JCheckBox autoSaveInTextFile, autoCopyPassword, saveInTextFileWithData, saveInTextFileWithComment, 
-    warningWind; // CheckBoxes
+    warningWind, saveInTextFileForParsing; // CheckBoxes
 
     JComboBox levelsDifficulty; // Combobox
 
@@ -82,6 +82,8 @@ public class AML_ag {
     int saveSucceffulyWindowSizeW = 230, saveSucceffulyWindowSizeH = 100;
 
     int clearTextFileAcceptW = 500, clearTextFileAcceptH = 100;
+
+    int parserExampleW = 800, parserExampleH = 900;
    
     int sizeMainWindowW = (screenSize.width - mainWindowSizeW) / 2, sizeMainWindowH = (screenSize.height - mainWindowSizeH) / 2;
 
@@ -95,10 +97,12 @@ public class AML_ag {
 
     int sizeCTFAW = (screenSize.width - clearTextFileAcceptW) / 2, sizeCTFAH = (screenSize.height - clearTextFileAcceptH) / 2;
 
+    int sizePEW = (screenSize.width - parserExampleW) / 2, sizePEH = (screenSize.height - parserExampleH) / 2;
+
     // CHECKBOXES BOOL
 
     boolean warningWindowState = true, autoClipBoardPassword = true, saveWithData = true, saveWithComment = true,
-    autoSaveITF = true;
+    autoSaveITF = true, saveInTextFileForParsingBoolean = true;
     
     AML_ag()
     {
@@ -241,6 +245,19 @@ public class AML_ag {
             }});
         settingsMenu.add(warningWind);
 
+        saveInTextFileForParsing = new JCheckBox("Save for parsing", AUTO_SAVE_BOOL);
+        saveInTextFileForParsing.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getSource() == saveInTextFileForParsing) {
+                    if (e.getStateChange() == 1) {
+                        saveInTextFileForParsingBoolean = true;
+                    } else {
+                        saveInTextFileForParsingBoolean = false;
+                    }
+                }
+            }
+        });
+
         defaultPasswordLevel = new JLabel("Default password level: " + defaultLevel);
         settingsMenu.add(defaultPasswordLevel);
 
@@ -253,10 +270,12 @@ public class AML_ag {
         textHelpAboutSecondString = new JLabel("You can save got info in text file (accounts.txt)");
         textHelpAboutThirdString = new JLabel("You can castomize default settings in config.ini");
         helpAboutPassword = new JMenuItem("You can see password difficulty levels -->");
+        helpParserExample = new JMenuItem("Example for parser on python");
         helpMenu.add(textHelpAboutFirstString);
         helpMenu.add(textHelpAboutSecondString);
         helpMenu.add(textHelpAboutThirdString);
         helpMenu.add(helpAboutPassword);
+        helpMenu.add(helpParserExample);
         mainMenuBar.add(helpMenu);
 
         // LINKS
@@ -1449,6 +1468,22 @@ public class AML_ag {
             }
         }); 
 
+        helpParserExample.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parserExampleWindow = new JFrame("Parser example [Python]");
+
+                parserExample = new JLabel("//code");
+                parserExample.setBounds(10, 10, 500, 20);
+                parserExampleWindow.add(parserExample);
+
+                parserExampleWindow.setSize(500, 500);
+                parserExampleWindow.setBounds(100, 100, 500, 500);
+                parserExampleWindow.setLayout(null);
+                parserExampleWindow.setVisible(true);
+            }
+        }); 
+
         // TOOLTIPS
 
         textLevelsDifficulty.setToolTipText("You can see levels in Help.");
@@ -1459,6 +1494,8 @@ public class AML_ag {
         saveInTextFileWithComment.setToolTipText("Save info with comment.\nFor example: // Account for google.");
         defaultPasswordLevel.setToolTipText("Default password level from config.ini.");
         helpAboutPassword.setToolTipText("Click. x)");
+        saveInTextFileForParsing.setToolTipText("Save data for parsing.")
+        helpParserExample.setToolTipText("Parser example on Python.")
 
 
 
