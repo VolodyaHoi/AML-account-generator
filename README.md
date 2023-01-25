@@ -33,6 +33,12 @@ AML account generator 0.1.0 version - functional generator random password and n
 
 > Application settings
 
+## Info
+
+Complete source a version is being developed 0.1.1
+
+Splited source and compiled is 0.1.0
+
 ## Using:
 
 For start compiled application use:
